@@ -1,16 +1,42 @@
 import router from '@ohos.router';
+import { BusinessError } from '@ohos.base';
 
 @Entry
 @Component
 struct LevelPage {
+  // Métodos de navegación con manejo de errores
+  private navigateToBasic(): void {
+
+    router.pushUrl({
+      url: 'pages/LevelBasic'
+    }).catch((err: BusinessError) => {
+      console.error(`Navigation to Basic failed. Code: ${err.code}, Message: ${err.message}`);
+    });
+  }
+
+  private navigateToIntermediate(): void {
+    router.pushUrl({
+      url: 'pages/LevelIntermediate'
+    }).catch((err: BusinessError) => {
+      console.error(`Navigation to Intermediate failed. Code: ${err.code}, Message: ${err.message}`);
+    });
+  }
+
+  private navigateToAdvanced(): void {
+    router.pushUrl({
+      url: 'pages/LevelAdvanced'
+    }).catch((err: BusinessError) => {
+      console.error(`Navigation to Advanced failed. Code: ${err.code}, Message: ${err.message}`);
+    });
+  }
+
   build() {
     Stack({ alignContent: Alignment.Center }) {
-
       // Imagen de fondo
       Image($r('app.media.vale'))
         .width('100%')
         .height('100%')
-        .objectFit(ImageFit.Cover) // Ajusta sin deformar
+        .objectFit(ImageFit.Cover)
         .opacity(1)
 
       // Contenido principal
@@ -28,11 +54,11 @@ struct LevelPage {
         Button('Básico', { type: ButtonType.Capsule })
           .width('70%')
           .height(40)
-          .backgroundColor('#00000000') // Transparente
+          .backgroundColor('#00000000')
           .border({ width: 2, color: Color.White })
           .fontColor(Color.White)
           .margin({ bottom: 15 })
-          .onClick(() => router.pushUrl({ url: 'pages/LevelBasic' }))
+          .onClick(() => this.navigateToBasic())
 
         // Botón Intermedio
         Button('Intermedio', { type: ButtonType.Capsule })
@@ -42,7 +68,7 @@ struct LevelPage {
           .border({ width: 2, color: Color.White })
           .fontColor(Color.White)
           .margin({ bottom: 15 })
-          .onClick(() => router.pushUrl({ url: 'pages/LevelIntermediate' }))
+          .onClick(() => this.navigateToIntermediate())
 
         // Botón Avanzado
         Button('Avanzado', { type: ButtonType.Capsule })
@@ -52,7 +78,7 @@ struct LevelPage {
           .border({ width: 2, color: Color.White })
           .fontColor(Color.White)
           .margin({ bottom: 15 })
-          .onClick(() => router.pushUrl({ url: 'pages/LevelAdvanced' }))
+          .onClick(() => this.navigateToAdvanced())
       }
       .width('100%')
       .height('100%')

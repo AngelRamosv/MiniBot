@@ -1,11 +1,43 @@
 import router from '@ohos.router';
+import { BusinessError } from '@ohos.base';
+
+// Versión corregida sin 'as const' y con tipado explícito
+interface Topic {
+  INTRO: string;
+  VARIABLES: string;
+  OPERATORS: string;
+  CONDITIONALS: string;
+  LOOPS: string;
+}
+
+const TOPICS: Topic = {
+  INTRO: 'introduccion',
+  VARIABLES: 'variables',
+  OPERATORS: 'operadores',
+  CONDITIONALS: 'condicionales',
+  LOOPS: 'ciclos'
+};
 
 @Entry
 @Component
 struct LevelBasic {
+  // Método original sin cambios
+  private navigateToQuiz(topic: string, title: string): void {
+    router.pushUrl({
+      url: 'pages/QuizPage',
+      params: {
+        topic: topic,
+        title: title,
+        difficulty: 'basic'
+      }
+    }).catch((err: BusinessError) => {
+      console.error(`Navigation failed: ${err.message}`);
+    });
+  }
+
   build() {
     Stack({ alignContent: Alignment.Center }) {
-
+      // Imagen de fondo (original)
       Image($r('app.media.vale'))
         .width('100%')
         .height('100%')
@@ -14,7 +46,7 @@ struct LevelBasic {
 
       Scroll() {
         Column() {
-          // Título
+          // Título (original)
           Text('Básico')
             .fontSize(22)
             .fontColor(Color.White)
@@ -24,7 +56,7 @@ struct LevelBasic {
             .textAlign(TextAlign.Center)
 
           Column() {
-            // Botón Introducción
+            // Botones con constantes corregidas
             Button('Introducción', { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
@@ -32,18 +64,8 @@ struct LevelBasic {
               .border({ width: 2, color: Color.White })
               .fontColor(Color.White)
               .margin({ bottom: 12 })
-              .onClick(() => {
-                router.pushUrl({
-                  url: 'pages/QuizPage',
-                  params: {
-                    topic: 'introduccion',
-                    title: 'Introducción a Python',
-                    difficulty: 'basic'
-                  }
-                });
-              })
+              .onClick(() => this.navigateToQuiz(TOPICS.INTRO, 'Introducción'))
 
-            // Botón Variables
             Button('Variables', { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
@@ -51,18 +73,8 @@ struct LevelBasic {
               .border({ width: 2, color: Color.White })
               .fontColor(Color.White)
               .margin({ bottom: 12 })
-              .onClick(() => {
-                router.pushUrl({
-                  url: 'pages/QuizPage',
-                  params: {
-                    topic: 'variables',
-                    title: 'Variables en Python',
-                    difficulty: 'basic'
-                  }
-                });
-              })
+              .onClick(() => this.navigateToQuiz(TOPICS.VARIABLES, 'Variables'))
 
-            // Botón Operadores
             Button('Operadores', { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
@@ -70,18 +82,8 @@ struct LevelBasic {
               .border({ width: 2, color: Color.White })
               .fontColor(Color.White)
               .margin({ bottom: 12 })
-              .onClick(() => {
-                router.pushUrl({
-                  url: 'pages/QuizPage',
-                  params: {
-                    topic: 'operadores',
-                    title: 'Operadores en Python',
-                    difficulty: 'basic'
-                  }
-                });
-              })
+              .onClick(() => this.navigateToQuiz(TOPICS.OPERATORS, 'Operadores'))
 
-            // Botón Condicionales
             Button('Condicionales', { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
@@ -89,18 +91,8 @@ struct LevelBasic {
               .border({ width: 2, color: Color.White })
               .fontColor(Color.White)
               .margin({ bottom: 12 })
-              .onClick(() => {
-                router.pushUrl({
-                  url: 'pages/QuizPage',
-                  params: {
-                    topic: 'condicionales',
-                    title: 'Condicionales en Python',
-                    difficulty: 'basic'
-                  }
-                });
-              })
+              .onClick(() => this.navigateToQuiz(TOPICS.CONDITIONALS, 'Condicionales'))
 
-            // Botón Ciclos
             Button('Ciclos', { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
@@ -108,16 +100,7 @@ struct LevelBasic {
               .border({ width: 2, color: Color.White })
               .fontColor(Color.White)
               .margin({ bottom: 45 })
-              .onClick(() => {
-                router.pushUrl({
-                  url: 'pages/QuizPage',
-                  params: {
-                    topic: 'ciclos',
-                    title: 'Ciclos en Python',
-                    difficulty: 'basic'
-                  }
-                });
-              })
+              .onClick(() => this.navigateToQuiz(TOPICS.LOOPS, 'Ciclos'))
           }
           .width('100%')
           .borderRadius({ topLeft: 30, topRight: 30 })

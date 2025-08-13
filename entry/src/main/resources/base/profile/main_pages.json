@@ -4,6 +4,7 @@
     "pages/LevelPage",
     "pages/LevelBasic",
     "pages/LevelIntermediate",
-    "pages/LevelAdvanced"
+    "pages/LevelAdvanced",
+    "pages/QuizPage"
   ]
 }

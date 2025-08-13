@@ -1,22 +1,53 @@
 import router from '@ohos.router';
+import { BusinessError } from '@ohos.base';
+
+// Definimos el tipo Topic para los temas avanzados
+interface AdvancedTopic {
+  OOP: string;
+  LAMBDA: string;
+  MANAGEMENT: string;
+  LIBRARIES: string;
+  API: string;
+}
+
+// Constantes para los temas avanzados
+const ADVANCED_TOPICS: AdvancedTopic = {
+  OOP: 'poo',
+  LAMBDA: 'lambda',
+  MANAGEMENT: 'manejo_archivos',
+  LIBRARIES: 'librerias',
+  API: 'api'
+};
 
 @Entry
 @Component
 struct LevelAdvanced {
+  // Método de navegación (igual que en LevelBasic)
+  private navigateToQuiz(topic: string, title: string): void {
+    router.pushUrl({
+      url: 'pages/QuizPage',
+      params: {
+        topic: topic,
+        title: title,
+        difficulty: 'advanced'
+      }
+    }).catch((err: BusinessError) => {
+      console.error(`Navigation failed: ${err.message}`);
+    });
+  }
+
   build() {
     Stack({ alignContent: Alignment.Center }) {
-
-      // Imagen de fondo
+      // Imagen de fondo (igual que en LevelBasic)
       Image($r('app.media.vale'))
         .width('100%')
         .height('100%')
-        .objectFit(ImageFit.Cover) // Ajusta sin deformar
+        .objectFit(ImageFit.Cover)
         .opacity(1)
 
-      // Contenido principal
       Scroll() {
         Column() {
-          // Título
+          // Título (igual que en LevelBasic)
           Text('Avanzado')
             .fontSize(22)
             .fontColor(Color.White)
@@ -25,29 +56,26 @@ struct LevelAdvanced {
             .width('100%')
             .textAlign(TextAlign.Center)
 
-          // Contenedor curvo para los botones
           Column() {
-            // Botón Poo
-            Button('Poo', { type: ButtonType.Capsule })
+            // Botones con la misma estructura que LevelBasic
+            Button('POO', { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
               .border({ width: 2, color: Color.White })
               .fontColor(Color.White)
               .margin({ bottom: 12 })
-              .onClick(() => router.pushUrl({ url: 'pages/IntroductionPage' }))
+              .onClick(() => this.navigateToQuiz(ADVANCED_TOPICS.OOP, 'Programación Orientada a\nObjetos'))
 
-            // Botón Función Lambda
-            Button('Función Lambda', { type: ButtonType.Capsule })
+            Button('Funciones Lambda', { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
               .border({ width: 2, color: Color.White })
               .fontColor(Color.White)
               .margin({ bottom: 12 })
-              .onClick(() => router.pushUrl({ url: 'pages/VariablesPage' }))
+              .onClick(() => this.navigateToQuiz(ADVANCED_TOPICS.LAMBDA, 'Funciones\nLambda'))
 
-            // Botón Manejo de archivos
             Button('Manejo de archivos', { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
@@ -55,9 +83,8 @@ struct LevelAdvanced {
               .border({ width: 2, color: Color.White })
               .fontColor(Color.White)
               .margin({ bottom: 12 })
-              .onClick(() => router.pushUrl({ url: 'pages/OperatorsPage' }))
+              .onClick(() => this.navigateToQuiz(ADVANCED_TOPICS.MANAGEMENT, 'Manejo de\nArchivos'))
 
-            // Botón Uso de librerías
             Button('Uso de librerías', { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
@@ -65,22 +92,21 @@ struct LevelAdvanced {
               .border({ width: 2, color: Color.White })
               .fontColor(Color.White)
               .margin({ bottom: 12 })
-              .onClick(() => router.pushUrl({ url: 'pages/ConditionalsPage' }))
+              .onClick(() => this.navigateToQuiz(ADVANCED_TOPICS.LIBRARIES, 'Uso de\nLibrerías'))
 
-            // Botón API Python
-            Button('Api Python', { type: ButtonType.Capsule })
+            Button('API Python', { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
               .border({ width: 2, color: Color.White })
               .fontColor(Color.White)
               .margin({ bottom: 45 })
-              .onClick(() => router.pushUrl({ url: 'pages/LoopsPage' }))
+              .onClick(() => this.navigateToQuiz(ADVANCED_TOPICS.API, 'API Python'))
           }
           .width('100%')
-          .borderRadius({ topLeft: 30, topRight: 30 }) // Curvatura superior
+          .borderRadius({ topLeft: 30, topRight: 30 })
           .clip(true)
-          .backgroundColor('#00000055') // Semitransparente para ver imagen
+          .backgroundColor('#00000055')
         }
         .width('100%')
         .alignItems(HorizontalAlign.Center)

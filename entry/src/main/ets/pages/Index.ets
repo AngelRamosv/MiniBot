@@ -1,29 +1,40 @@
+// Importaciones
 import router from '@ohos.router';
-//Hola Angel
-@Entry
-@Component
-struct Index {
-  @State opacityValue: number = 0;
-  @State scaleValue: number = 0.5;
+import { BusinessError } from '@ohos.base';
 
+// Estructura del componente principal
+@Entry // Componente como punto de entrada
+@Component // Declara que esto es un componente visual
+struct Index {
+  // Valores reactivos
+  @State opacityValue: number = 0; // Opacidad
+  @State scaleValue: number = 0.5; // Tamaño
+  // Método
   onPageShow() {
     this.opacityValue = 1;
     this.scaleValue = 1;
   }
-
+  // Función de navegación
+  private navigateToLevelPage(): void {
+    router.pushUrl({
+      url: 'pages/LevelPage'
+    }).catch((err: BusinessError) => {
+      console.error(`Navigation failed. Code: ${err.code}, Message: ${err.message}`);
+    });
+  }
+  // Método build (Diseño de la pantalla)
   build() {
-    Stack({ alignContent: Alignment.Center }) {
-
-      // Imagen de fondo que ocupa toda la pantalla
+    Stack({ alignContent: Alignment.Center }) { // Contenedor que superpone elementos
+      // Imagen de fondo
       Image($r('app.media.fondo'))
         .width('100%')
         .height('100%')
-        .objectFit(ImageFit.Cover) // Ajusta sin deformar
-        .opacity(1) // 1 = visible
+        .objectFit(ImageFit.Cover)
+        .opacity(1)
 
       // Contenido principal
       Column() {
-        Text('Bienvenido a \nMiniBoti')
+        Text('Bienvenido a \nMiniBot')
           .fontSize(20)
           .fontColor(Color.White)
           .fontWeight(FontWeight.Bold)
@@ -34,7 +45,7 @@ struct Index {
             duration: 1000,
             curve: Curve.EaseOut
           })
-
+        // Imagen principal de MiniBot
         Image($r('app.media.roboco'))
           .width(100)
           .height(100)
@@ -46,7 +57,7 @@ struct Index {
             curve: Curve.EaseOut,
             delay: 200
           })
-
+        // Botón principal
         Button('Ok', { type: ButtonType.Capsule })
           .width(110)
           .height(30)
@@ -59,17 +70,20 @@ struct Index {
             curve: Curve.EaseOut,
             delay: 400
           })
+          // Evento Método del componente button
           .onClick(() => {
-            router.pushUrl({ url: 'pages/LevelPage' });
+            this.navigateToLevelPage();
           })
       }
+      // Propiedades aplicadas a column (texto, imagen, boton)
       .width('100%')
       .height('100%')
-      .justifyContent(FlexAlign.Center)
-      .alignItems(HorizontalAlign.Center)
+      .justifyContent(FlexAlign.Center) // Centra verticalemnte
+      .alignItems(HorizontalAlign.Center) // Centra horizontalmente
     }
+    // Evento del sistema cuando la pantalla aparece
     .onAppear(() => {
-      this.onPageShow();
+      this.onPageShow(); // Método
     })
   }
 }
