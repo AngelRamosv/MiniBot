@@ -1,4 +1,4 @@
-// Importaciones (sin cambios)
+// Importaciones
 import { QuizController } from '../controller/QuizController';
 import router from '@ohos.router';
 import { Question, DifficultyLevel } from '../model/TopicsData';
@@ -13,7 +13,7 @@ interface QuizParams {
 @Entry
 @Component
 struct QuizPage {
-  // Variables y estados (con inicialización segura)
+  // Variables y estados (sin cambios)
   private quizController: QuizController = new QuizController('introduccion', 'basic');
   @State currentQuestions: Question[] = [];
   @State currentQuestionIndex: number = 0;
@@ -26,7 +26,7 @@ struct QuizPage {
   // Scroll (sin cambios)
   private scroller: Scroller = new Scroller();
 
-  // Carga de parámetros (con pequeña mejora)
+  // Carga de parámetros (sin cambios)
   aboutToAppear() {
     const params = router.getParams() as QuizParams;
     if (params) {
@@ -34,7 +34,7 @@ struct QuizPage {
     }
   }
 
-  // Inicialización (sin cambios)
+  // Métodos existentes (sin cambios)
   private initializeQuiz(params: QuizParams): void {
     this.quizTitle = params.title;
     this.quizController = new QuizController(params.topic, params.difficulty);
@@ -42,7 +42,6 @@ struct QuizPage {
     this.resetQuizState();
   }
 
-  // Resto de métodos (sin cambios)
   private resetQuizState(): void {
     this.currentQuestionIndex = 0;
     this.selectedAnswer = null;
@@ -78,13 +77,6 @@ struct QuizPage {
     }
   }
 
-  private retryQuestion(): void {
-    this.selectedAnswer = null;
-    this.showResult = false;
-    this.isAnswerCorrect = false;
-    this.scrollToTop();
-  }
-
   private scrollToTop(): void {
     this.scroller.scrollTo({
       xOffset: 0,
@@ -93,7 +85,7 @@ struct QuizPage {
     });
   }
 
-  // UI (COMPLETAMENTE IGUAL a tu versión original)
+  // UI modificada según tus requerimientos
   build() {
     Stack({ alignContent: Alignment.Center }) {
       Image($r('app.media.ok'))
@@ -157,28 +149,25 @@ struct QuizPage {
                 .justifyContent(FlexAlign.Center)
                 .margin({ bottom: 20 })
 
-                if (this.isAnswerCorrect) {
-                  Button('Siguiente', { type: ButtonType.Capsule })
-                    .width('50%')
-                    .height(45)
-                    .backgroundColor('#4CAF50')
+                // Botón único "Siguiente" o "Finalizar"
+                Button(this.currentQuestionIndex < this.currentQuestions.length - 1 ? 'Siguiente' : 'Finalizar',
+                  { type: ButtonType.Capsule })
+                  .width('50%')
+                  .height(45)
+                  .backgroundColor(this.isAnswerCorrect ? '#4CAF50' : '#F44336')
+                  .fontColor(Color.White)
+                  .fontWeight(FontWeight.Bold)
+                  .margin({ top: 10, bottom: 20 })
+                  .onClick(() => {
+                    this.goToNextQuestion();
+                  })
+
+                // Mostrar resultado final cuando sea la última pregunta
+                if (this.currentQuestionIndex === this.currentQuestions.length - 1) {
+                  Text(`Puntuación: ${this.score}/${this.currentQuestions.length}`)
+                    .fontSize(20)
                     .fontColor(Color.White)
-                    .fontWeight(FontWeight.Bold)
-                    .margin({ top: 10, bottom: 20 })
-                    .onClick(() => {
-                      this.goToNextQuestion();
-                    })
-                } else {
-                  Button('Reintentar', { type: ButtonType.Capsule })
-                    .width('50%')
-                    .height(45)
-                    .backgroundColor('#F44336')
-                    .fontColor(Color.White)
-                    .fontWeight(FontWeight.Bold)
-                    .margin({ top: 10, bottom: 20 })
-                    .onClick(() => {
-                      this.retryQuestion();
-                    })
+                    .margin({ top: 10 })
                 }
               }
               .width('100%')
