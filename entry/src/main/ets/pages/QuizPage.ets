@@ -1,9 +1,7 @@
-// Importaciones
 import { QuizController } from '../controller/QuizController';
 import router from '@ohos.router';
 import { Question, DifficultyLevel } from '../model/TopicsData';
 
-// Interface (sin cambios)
 interface QuizParams {
   topic: string;
   title: string;
@@ -13,7 +11,6 @@ interface QuizParams {
 @Entry
 @Component
 struct QuizPage {
-  // Variables y estados (sin cambios)
   private quizController: QuizController = new QuizController('introduccion', 'basic');
   @State currentQuestions: Question[] = [];
   @State currentQuestionIndex: number = 0;
@@ -22,11 +19,8 @@ struct QuizPage {
   @State score: number = 0;
   @State quizTitle: string = 'Quiz Python';
   @State isAnswerCorrect: boolean = false;
-
-  // Scroll (sin cambios)
   private scroller: Scroller = new Scroller();
 
-  // Carga de parámetros (sin cambios)
   aboutToAppear() {
     const params = router.getParams() as QuizParams;
     if (params) {
@@ -34,7 +28,6 @@ struct QuizPage {
     }
   }
 
-  // Métodos existentes (sin cambios)
   private initializeQuiz(params: QuizParams): void {
     this.quizTitle = params.title;
     this.quizController = new QuizController(params.topic, params.difficulty);
@@ -72,8 +65,6 @@ struct QuizPage {
       this.showResult = false;
       this.isAnswerCorrect = false;
       this.scrollToTop();
-    } else {
-      router.back();
     }
   }
 
@@ -85,7 +76,6 @@ struct QuizPage {
     });
   }
 
-  // UI modificada según tus requerimientos
   build() {
     Stack({ alignContent: Alignment.Center }) {
       Image($r('app.media.ok'))
@@ -149,25 +139,59 @@ struct QuizPage {
                 .justifyContent(FlexAlign.Center)
                 .margin({ bottom: 20 })
 
-                // Botón único "Siguiente" o "Finalizar"
-                Button(this.currentQuestionIndex < this.currentQuestions.length - 1 ? 'Siguiente' : 'Finalizar',
-                  { type: ButtonType.Capsule })
-                  .width('50%')
-                  .height(45)
-                  .backgroundColor(this.isAnswerCorrect ? '#4CAF50' : '#F44336')
-                  .fontColor(Color.White)
-                  .fontWeight(FontWeight.Bold)
-                  .margin({ top: 10, bottom: 20 })
-                  .onClick(() => {
-                    this.goToNextQuestion();
-                  })
-
-                // Mostrar resultado final cuando sea la última pregunta
-                if (this.currentQuestionIndex === this.currentQuestions.length - 1) {
-                  Text(`Puntuación: ${this.score}/${this.currentQuestions.length}`)
-                    .fontSize(20)
+                if (this.currentQuestionIndex < this.currentQuestions.length - 1) {
+                  Button('Siguiente', { type: ButtonType.Capsule })
+                    .width('50%')
+                    .height(45)
+                    .backgroundColor(this.isAnswerCorrect ? '#4CAF50' : '#F44336')
                     .fontColor(Color.White)
-                    .margin({ top: 10 })
+                    .fontWeight(FontWeight.Bold)
+                    .margin({ top: 10, bottom: 20 })
+                    .onClick(() => {
+                      this.goToNextQuestion();
+                    })
+                } else {
+                  Column() {
+                    if (this.score === this.currentQuestions.length) {
+                      Image($r('app.media.meta'))
+                        .width(60)
+                        .height(60)
+                        .margin({ bottom: 10 })
+                      Text('¡Felicidades, eres un crack!')
+                        .fontSize(18)
+                        .fontColor('#4CAF50')
+                        .fontWeight(FontWeight.Bold)
+                        .margin({ bottom: 10 })
+                    } else {
+                      Image($r('app.media.objetivo'))
+                        .width(60)
+                        .height(60)
+                        .margin({ bottom: 10 })
+                      Text('¡Buen intento, sigue practicando!')
+                        .fontSize(18)
+                        .fontColor('#FFC107')
+                        .fontWeight(FontWeight.Bold)
+                        .margin({ bottom: 10 })
+                    }
+
+                    Text(`Puntuación final: ${this.score}/${this.currentQuestions.length}`)
+                      .fontSize(20)
+                      .fontColor(Color.White)
+                      .margin({ top: 10, bottom: 20 })
+
+                    Button('Finalizar', { type: ButtonType.Capsule })
+                      .width('50%')
+                      .height(45)
+                      .backgroundColor('#2196F3')
+                      .fontColor(Color.White)
+                      .fontWeight(FontWeight.Bold)
+                      .margin({ top: 10, bottom: 20 })
+                      .onClick(() => {
+                        router.back();
+                      })
+                  }
+                  .width('100%')
+                  .alignItems(HorizontalAlign.Center)
                 }
               }
               .width('100%')
