@@ -15,9 +15,9 @@ struct Index {
     this.scaleValue = 1;
   }
   // Función de navegación
-  private navigateToLevelPage(): void {
+  private navigateToLanguageSelector(): void {
     router.pushUrl({
-      url: 'pages/LevelPage'
+      url: 'pages/LanguageSelector'
     }).catch((err: BusinessError) => {
       console.error(`Navigation failed. Code: ${err.code}, Message: ${err.message}`);
     });
@@ -72,7 +72,7 @@ struct Index {
           })
           // Evento Método del componente button
           .onClick(() => {
-            this.navigateToLevelPage();
+            this.navigateToLanguageSelector();
           })
       }
       // Propiedades aplicadas a column (texto, imagen, boton)
