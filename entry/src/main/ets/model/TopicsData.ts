@@ -2,7 +2,7 @@
 export type DifficultyLevel = 'basic' | 'intermediate' | 'advanced';
 
 // Definimos una constante TOPICS para los temas
-export const TOPICS = { // Objeto llamado TOPICS
+export const TOPICS = { // Objeto
   INTRO: 'introduccion',
   VARIABLES: 'variables',
   OPERATORS: 'operadores',
@@ -30,9 +30,9 @@ export interface Question {
   difficulty: DifficultyLevel;
 }
 
-// Banco de preguntas organizado por temas
+// Arreglo de preguntas organizado por temas
 export const allQuestions: Question[] = [
-// Tema Introducción
+  // Tema Introducción
   {
     id: 'intro-1',
     questionText: `¿Python es un lenguaje?`,

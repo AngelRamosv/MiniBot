@@ -1,7 +1,8 @@
+// Importaciones
 import router from '@ohos.router';
 import { BusinessError } from '@ohos.base';
 
-// Versión corregida sin 'as const' y con tipado explícito
+// Interfaz para los temas
 interface Topic {
   INTRO: string;
   VARIABLES: string;
@@ -9,7 +10,7 @@ interface Topic {
   CONDITIONALS: string;
   LOOPS: string;
 }
-
+// Objeto de la interfaz Topic
 const TOPICS: Topic = {
   INTRO: 'introduccion',
   VARIABLES: 'variables',
@@ -17,11 +18,12 @@ const TOPICS: Topic = {
   CONDITIONALS: 'condicionales',
   LOOPS: 'ciclos'
 };
-
+// Componente principal
 @Entry
 @Component
+// Estructura de la página
 struct LevelBasic {
-  // Método original sin cambios
+  // Método de navegación a QuizPage
   private navigateToQuiz(topic: string, title: string): void {
     router.pushUrl({
       url: 'pages/QuizPage',
@@ -34,10 +36,10 @@ struct LevelBasic {
       console.error(`Navigation failed: ${err.message}`);
     });
   }
-
+  // Diseño de pantalla
   build() {
     Stack({ alignContent: Alignment.Center }) {
-      // Imagen de fondo (original)
+      // Imagen de fondo
       Image($r('app.media.vale'))
         .width('100%')
         .height('100%')
@@ -45,8 +47,9 @@ struct LevelBasic {
         .opacity(1)
 
       Scroll() {
+        // Contenido principal
         Column() {
-          // Título (original)
+          // Título
           Text('Básico')
             .fontSize(22)
             .fontColor(Color.White)
@@ -56,7 +59,7 @@ struct LevelBasic {
             .textAlign(TextAlign.Center)
 
           Column() {
-            // Botones con constantes corregidas
+            // Botón Introducción
             Button('Introducción', { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
@@ -66,6 +69,7 @@ struct LevelBasic {
               .margin({ bottom: 12 })
               .onClick(() => this.navigateToQuiz(TOPICS.INTRO, 'Introducción'))
 
+            // Botón Variables
             Button('Variables', { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
@@ -75,6 +79,7 @@ struct LevelBasic {
               .margin({ bottom: 12 })
               .onClick(() => this.navigateToQuiz(TOPICS.VARIABLES, 'Variables'))
 
+            // Botón Operadores
             Button('Operadores', { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
@@ -84,6 +89,7 @@ struct LevelBasic {
               .margin({ bottom: 12 })
               .onClick(() => this.navigateToQuiz(TOPICS.OPERATORS, 'Operadores'))
 
+            // Botón Condicionales
             Button('Condicionales', { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
@@ -93,6 +99,7 @@ struct LevelBasic {
               .margin({ bottom: 12 })
               .onClick(() => this.navigateToQuiz(TOPICS.CONDITIONALS, 'Condicionales'))
 
+            // Botón Ciclos
             Button('Ciclos', { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
@@ -102,14 +109,17 @@ struct LevelBasic {
               .margin({ bottom: 45 })
               .onClick(() => this.navigateToQuiz(TOPICS.LOOPS, 'Ciclos'))
           }
+          // Contenedor de botones
           .width('100%')
           .borderRadius({ topLeft: 30, topRight: 30 })
           .clip(true)
           .backgroundColor('#00000055')
         }
+        // Column()
         .width('100%')
         .alignItems(HorizontalAlign.Center)
       }
+      // Scroll
       .width('100%')
       .height('100%')
       .scrollBar(BarState.Off)

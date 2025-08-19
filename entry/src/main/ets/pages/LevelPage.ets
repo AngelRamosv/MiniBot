@@ -1,19 +1,21 @@
+// Importaciones
 import router from '@ohos.router';
 import { BusinessError } from '@ohos.base';
 
+// Componente principal
 @Entry
 @Component
+// Estructura de la página
 struct LevelPage {
-  // Métodos de navegación con manejo de errores
+  // Método de navegación para nivel básico
   private navigateToBasic(): void {
-
     router.pushUrl({
       url: 'pages/LevelBasic'
     }).catch((err: BusinessError) => {
       console.error(`Navigation to Basic failed. Code: ${err.code}, Message: ${err.message}`);
     });
   }
-
+  // Método de navegación para nivel intermedio
   private navigateToIntermediate(): void {
     router.pushUrl({
       url: 'pages/LevelIntermediate'
@@ -21,7 +23,7 @@ struct LevelPage {
       console.error(`Navigation to Intermediate failed. Code: ${err.code}, Message: ${err.message}`);
     });
   }
-
+  // Método de navegación para nivel avanzado
   private navigateToAdvanced(): void {
     router.pushUrl({
       url: 'pages/LevelAdvanced'
@@ -29,7 +31,7 @@ struct LevelPage {
       console.error(`Navigation to Advanced failed. Code: ${err.code}, Message: ${err.message}`);
     });
   }
-
+  // Diseño de la pantalla
   build() {
     Stack({ alignContent: Alignment.Center }) {
       // Imagen de fondo
@@ -41,7 +43,7 @@ struct LevelPage {
 
       // Contenido principal
       Column() {
-        // Título centrado
+        // Título
         Text('Nivel')
           .fontSize(22)
           .fontColor(Color.White)
@@ -80,6 +82,7 @@ struct LevelPage {
           .margin({ bottom: 15 })
           .onClick(() => this.navigateToAdvanced())
       }
+      // Propiedades que corresponden a Column()
       .width('100%')
       .height('100%')
       .justifyContent(FlexAlign.Start)

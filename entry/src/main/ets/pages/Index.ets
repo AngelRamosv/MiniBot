@@ -1,23 +1,23 @@
 // Importaciones
-import router from '@ohos.router';
-import { BusinessError } from '@ohos.base';
+import router from '@ohos.router'; // Navegación
+import { BusinessError } from '@ohos.base'; // Manejo de errores
 
 // Estructura del componente principal
 @Entry // Componente como punto de entrada
-@Component // Declara que esto es un componente visual
-struct Index {
-  // Valores reactivos
+@Component // Componente visual
+struct Index { // Estructura de la página
+  // Estados del componente
   @State opacityValue: number = 0; // Opacidad
-  @State scaleValue: number = 0.5; // Tamaño
-  // Método
+  @State scaleValue: number = 0.5; // Tamaño (Escala)
+  // Método para mostrar los elementos
   onPageShow() {
     this.opacityValue = 1;
     this.scaleValue = 1;
   }
   // Función de navegación
-  private navigateToLanguageSelector(): void {
+  private navigateToLevelPage(): void {
     router.pushUrl({
-      url: 'pages/LanguageSelector'
+      url: 'pages/LevelPage'
     }).catch((err: BusinessError) => {
       console.error(`Navigation failed. Code: ${err.code}, Message: ${err.message}`);
     });
@@ -29,12 +29,12 @@ struct Index {
       Image($r('app.media.fondo'))
         .width('100%')
         .height('100%')
-        .objectFit(ImageFit.Cover)
+        .objectFit(ImageFit.Cover) // Ajusta la imagen para cubrir el espacio manteniendo proporciones
         .opacity(1)
 
       // Contenido principal
       Column() {
-        Text('Bienvenido a \nMiniBot')
+        Text($r('app.string.Welcome'))
           .fontSize(20)
           .fontColor(Color.White)
           .fontWeight(FontWeight.Bold)
@@ -72,7 +72,7 @@ struct Index {
           })
           // Evento Método del componente button
           .onClick(() => {
-            this.navigateToLanguageSelector();
+            this.navigateToLevelPage();
           })
       }
       // Propiedades aplicadas a column (texto, imagen, boton)
@@ -83,7 +83,7 @@ struct Index {
     }
     // Evento del sistema cuando la pantalla aparece
     .onAppear(() => {
-      this.onPageShow(); // Método
+      this.onPageShow();
     })
   }
 }
