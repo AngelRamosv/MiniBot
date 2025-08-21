@@ -13,9 +13,116 @@
       "value": "label"
     },
     {
+      "name": "Language",
+      "value": "Language"
+    },
+    {
+      "name": "Spanish",
+      "value": "Spanish"
+    },
+    {
+      "name": "English",
+      "value": "English"
+    },
+    {
+      "name": "Go",
+      "value": "Go"
+    },
+    {
       "name": "Welcome",
-      "value": "Bienvenido a\nMiniBot"
+      "value": "Welcome to\nMiniBot"
+    },
+    {
+      "name": "Ok",
+      "value": "Ok"
+    },
+    {
+      "name": "Levelp",
+      "value": "Level"
+    },
+    {
+      "name": "Basicp",
+      "value": "Basic"
+    },
+    {
+      "name": "Intermediatep",
+      "value": "Intermediate"
+    },
+    {
+      "name": "Advancedp",
+      "value": "Advanced"
+    },
+    {
+      "name": "Basicb",
+      "value": "Basic"
+    },
+    {
+      "name": "Introductionb",
+      "value": "Introduction"
+    },
+    {
+      "name": "Variablesb",
+      "value": "Variables"
+    },
+    {
+      "name": "Operatorsb",
+      "value": "Operators"
+    },
+    {
+      "name": "Conditionalsb",
+      "value": "Conditionals"
+    },
+    {
+      "name": "Cyclesb",
+      "value": "Cycles"
+    },
+    {
+      "name": "Intermediatei",
+      "value": "Intermediate"
+    },
+    {
+      "name": "Functionsi",
+      "value": "Functions"
+    },
+    {
+      "name": "Listsandtuplesi",
+      "value": "Lists and tuples"
+    },
+    {
+      "name": "Dictionariesi",
+      "value": "Dictionaries"
+    },
+    {
+      "name": "Errorhandlingi",
+      "value": "Error handling"
+    },
+    {
+      "name": "Filesi",
+      "value": "Files"
+    },
+    {
+      "name": "Advanceda",
+      "value": "Advanced"
+    },
+    {
+      "name": "POOa",
+      "value": "POO"
+    },
+    {
+      "name": "Functionslambda",
+      "value": "Functions Lambda"
+    },
+    {
+      "name": "Filemanagementa",
+      "value": "File management"
+    },
+    {
+      "name": "Useoflibrariesa",
+      "value": "Use of libraries"
+    },
+    {
+      "name": "APIa",
+      "value": "API"
     }
-
   ]
 }

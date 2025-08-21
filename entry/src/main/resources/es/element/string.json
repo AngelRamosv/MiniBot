@@ -1,8 +1,116 @@
 {
   "string": [
     {
+      "name": "Language",
+      "value": "Selecciona\nidioma"
+    },
+    {
+      "name": "Spanish",
+      "value": "Español"
+    },
+    {
+      "name": "English",
+      "value": "Inglés"
+    },
+    {
+      "name": "Go",
+      "value": "Ir"
+    },
+    {
       "name": "Welcome",
-      "value": "Hola Mundo en Español"
+      "value": "Bienvenido a\nMiniBot"
+    },
+    {
+      "name": "Ok",
+      "value": "Bien"
+    },
+    {
+      "name": "Levelp",
+      "value": "Nivel"
+    },
+    {
+      "name": "Basicp",
+      "value": "Básico"
+    },
+    {
+      "name": "Intermediatep",
+      "value": "Intermedio"
+    },
+    {
+      "name": "Advancedp",
+      "value": "Avanzado"
+    },
+    {
+      "name": "Basicb",
+      "value": "Básico"
+    },
+    {
+      "name": "Introductionb",
+      "value": "Introducción"
+    },
+    {
+      "name": "Variablesb",
+      "value": "Variables"
+    },
+    {
+      "name": "Operatorsb",
+      "value": "Operadores"
+    },
+    {
+      "name": "Conditionalsb",
+      "value": "Condicionales"
+    },
+    {
+      "name": "Cyclesb",
+      "value": "Ciclos"
+    },
+    {
+      "name": "Intermediatei",
+      "value": "Intermedio"
+    },
+    {
+      "name": "Functionsi",
+      "value": "Funciones"
+    },
+    {
+      "name": "Listsandtuplesi",
+      "value": "Listas y tuplas"
+    },
+    {
+      "name": "Dictionariesi",
+      "value": "Diccionarios"
+    },
+    {
+      "name": "Errorhandlingi",
+      "value": "Manejo de errores"
+    },
+    {
+      "name": "Filesi",
+      "value": "Archivos"
+    },
+    {
+      "name": "Advanceda",
+      "value": "Avanzado"
+    },
+    {
+      "name": "POOa",
+      "value": "POO"
+    },
+    {
+      "name": "Functionslambda",
+      "value": "Funciones Lambda"
+    },
+    {
+      "name": "Filemanagementa",
+      "value": "Manejo de archivos"
+    },
+    {
+      "name": "Useoflibrariesa",
+      "value": "Uso de librerías"
+    },
+    {
+      "name": "APIa",
+      "value": "API de python"
     }
   ]
 }

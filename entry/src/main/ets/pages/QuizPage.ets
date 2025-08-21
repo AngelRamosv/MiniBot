@@ -12,7 +12,7 @@ interface QuizParams {
 // Componente principal
 @Entry
 @Component
-// Estructura Principal
+  // Estructura Principal
 struct QuizPage {
   // Estados y Variables
   private quizController: QuizController = new QuizController('introduccion', 'basic');

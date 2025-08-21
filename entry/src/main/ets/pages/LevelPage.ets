@@ -5,7 +5,7 @@ import { BusinessError } from '@ohos.base';
 // Componente principal
 @Entry
 @Component
-// Estructura de la página
+  // Estructura de la página
 struct LevelPage {
   // Método de navegación para nivel básico
   private navigateToBasic(): void {
@@ -44,7 +44,7 @@ struct LevelPage {
       // Contenido principal
       Column() {
         // Título
-        Text('Nivel')
+        Text($r('app.string.Levelp'))
           .fontSize(22)
           .fontColor(Color.White)
           .fontWeight(FontWeight.Bold)
@@ -53,7 +53,7 @@ struct LevelPage {
           .textAlign(TextAlign.Center)
 
         // Botón Básico
-        Button('Básico', { type: ButtonType.Capsule })
+        Button($r('app.string.Basicp'), { type: ButtonType.Capsule })
           .width('70%')
           .height(40)
           .backgroundColor('#00000000')
@@ -63,7 +63,7 @@ struct LevelPage {
           .onClick(() => this.navigateToBasic())
 
         // Botón Intermedio
-        Button('Intermedio', { type: ButtonType.Capsule })
+        Button($r('app.string.Intermediatep'), { type: ButtonType.Capsule })
           .width('70%')
           .height(40)
           .backgroundColor('#00000000')
@@ -73,7 +73,7 @@ struct LevelPage {
           .onClick(() => this.navigateToIntermediate())
 
         // Botón Avanzado
-        Button('Avanzado', { type: ButtonType.Capsule })
+        Button($r('app.string.Advancedp'), { type: ButtonType.Capsule })
           .width('70%')
           .height(40)
           .backgroundColor('#00000000')

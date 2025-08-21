@@ -21,7 +21,7 @@ const TOPICS: Topic = {
 // Componente principal
 @Entry
 @Component
-// Estructura de la página
+  // Estructura de la página
 struct LevelBasic {
   // Método de navegación a QuizPage
   private navigateToQuiz(topic: string, title: string): void {
@@ -50,7 +50,7 @@ struct LevelBasic {
         // Contenido principal
         Column() {
           // Título
-          Text('Básico')
+          Text($r('app.string.Basicb'))
             .fontSize(22)
             .fontColor(Color.White)
             .fontWeight(FontWeight.Bold)
@@ -60,7 +60,7 @@ struct LevelBasic {
 
           Column() {
             // Botón Introducción
-            Button('Introducción', { type: ButtonType.Capsule })
+            Button($r('app.string.Introductionb'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
@@ -70,7 +70,7 @@ struct LevelBasic {
               .onClick(() => this.navigateToQuiz(TOPICS.INTRO, 'Introducción'))
 
             // Botón Variables
-            Button('Variables', { type: ButtonType.Capsule })
+            Button($r('app.string.Variablesb'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
@@ -80,7 +80,7 @@ struct LevelBasic {
               .onClick(() => this.navigateToQuiz(TOPICS.VARIABLES, 'Variables'))
 
             // Botón Operadores
-            Button('Operadores', { type: ButtonType.Capsule })
+            Button($r('app.string.Operatorsb'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
@@ -90,7 +90,7 @@ struct LevelBasic {
               .onClick(() => this.navigateToQuiz(TOPICS.OPERATORS, 'Operadores'))
 
             // Botón Condicionales
-            Button('Condicionales', { type: ButtonType.Capsule })
+            Button($r('app.string.Conditionalsb'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
@@ -100,7 +100,7 @@ struct LevelBasic {
               .onClick(() => this.navigateToQuiz(TOPICS.CONDITIONALS, 'Condicionales'))
 
             // Botón Ciclos
-            Button('Ciclos', { type: ButtonType.Capsule })
+            Button($r('app.string.Cyclesb'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')

@@ -21,7 +21,7 @@ const TOPICS: Topic = {
 // Componente principal
 @Entry
 @Component
-// Estructura de la página
+  // Estructura de la página
 struct LevelIntermediate {
   // Método de navegación a QuizPage
   private navigateToQuiz(topic: string, title: string): void {
@@ -50,7 +50,7 @@ struct LevelIntermediate {
         // Contenido principal
         Column() {
           // Título
-          Text('Intermedio')
+          Text($r('app.string.Intermediatei'))
             .fontSize(22)
             .fontColor(Color.White)
             .fontWeight(FontWeight.Bold)
@@ -60,7 +60,7 @@ struct LevelIntermediate {
 
           Column() {
             // Botón Funciones
-            Button('Funciones', { type: ButtonType.Capsule })
+            Button($r('app.string.Functionsi'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
@@ -70,7 +70,7 @@ struct LevelIntermediate {
               .onClick(() => this.navigateToQuiz(TOPICS.FUNCTIONS, 'Funciones'))
 
             // Botón Listas y Tuplas
-            Button('Listas y Tuplas', { type: ButtonType.Capsule })
+            Button($r('app.string.Listsandtuplesi'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
@@ -80,7 +80,7 @@ struct LevelIntermediate {
               .onClick(() => this.navigateToQuiz(TOPICS.LISTS_TUPLES, 'Listas y Tuplas'))
 
             // Botón Diccionarios
-            Button('Diccionarios', { type: ButtonType.Capsule })
+            Button($r('app.string.Dictionariesi'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
@@ -90,7 +90,7 @@ struct LevelIntermediate {
               .onClick(() => this.navigateToQuiz(TOPICS.DICTIONARIES, 'Diccionarios'))
 
             // Botón Manejo de Errores
-            Button('Manejo de Errores', { type: ButtonType.Capsule })
+            Button($r('app.string.Errorhandlingi'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
@@ -100,7 +100,7 @@ struct LevelIntermediate {
               .onClick(() => this.navigateToQuiz(TOPICS.ERROR_HANDLING, 'Manejo de\nErrores'))
 
             // Botón Archivos
-            Button('Archivos', { type: ButtonType.Capsule })
+            Button($r('app.string.Filesi'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')

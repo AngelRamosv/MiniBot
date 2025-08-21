@@ -23,7 +23,7 @@ const TOPICS: Topic = {
 // Componente principal
 @Entry
 @Component
-// Estructura de la página
+  // Estructura de la página
 struct LevelAdvanced {
   // Método de navegación a QuizPage
   private navigateToQuiz(topic: string, title: string): void {
@@ -52,7 +52,7 @@ struct LevelAdvanced {
         // Contenido principal
         Column() {
           // Título
-          Text('Avanzado')
+          Text($r('app.string.Advanceda'))
             .fontSize(22)
             .fontColor(Color.White)
             .fontWeight(FontWeight.Bold)
@@ -62,7 +62,7 @@ struct LevelAdvanced {
 
           Column() {
             // Botón POO
-            Button('POO', { type: ButtonType.Capsule })
+            Button($r('app.string.POOa'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
@@ -72,7 +72,7 @@ struct LevelAdvanced {
               .onClick(() => this.navigateToQuiz(TOPICS.OOP, 'Programación Orientada a\nObjetos'))
 
             // Botón Funciones Lambda
-            Button('Funciones Lambda', { type: ButtonType.Capsule })
+            Button($r('app.string.Functionslambda'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
@@ -82,7 +82,7 @@ struct LevelAdvanced {
               .onClick(() => this.navigateToQuiz(TOPICS.LAMBDA, 'Funciones\nLambda'))
 
             // Botón Manejo de archivos
-            Button('Manejo de archivos', { type: ButtonType.Capsule })
+            Button($r('app.string.Filemanagementa'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
@@ -92,7 +92,7 @@ struct LevelAdvanced {
               .onClick(() => this.navigateToQuiz(TOPICS.MANAGEMENT, 'Manejo de\nArchivos'))
 
             // Botón Uso de Librerías
-            Button('Uso de librerías', { type: ButtonType.Capsule })
+            Button($r('app.string.Useoflibrariesa'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
@@ -102,7 +102,7 @@ struct LevelAdvanced {
               .onClick(() => this.navigateToQuiz(TOPICS.LIBRARIES, 'Uso de\nLibrerías'))
 
             // Botón API
-            Button('API Python', { type: ButtonType.Capsule })
+            Button($r('app.string.APIa'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')

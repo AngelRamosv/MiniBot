@@ -32,9 +32,9 @@ export interface Question {
 
 // Arreglo de preguntas organizado por temas
 export const allQuestions: Question[] = [
-  // Tema Introducción
+// Tema Introducción
   {
-    id: 'intro-1',
+    id: 'intro_1',
     questionText: `¿Python es un lenguaje?`,
     options: ['Interpretado', 'Compilado', 'De bajo nivel', 'Dinámico'],
     correctAnswer: 0,
