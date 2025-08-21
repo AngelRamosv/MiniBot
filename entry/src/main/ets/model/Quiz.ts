@@ -1,11 +1,11 @@
-// Importación de TopicData (id, texto, opciones, respuesta correcta, etc)
+// Importación de la interfaz TopicsData (id, texto, opciones, respuesta correcta, etc)
 import { Question } from './TopicsData';
 // Clase Quiz
 export class Quiz {
   private questions: Question[]; // Arreglo de preguntas
 
   // Costructor
-  constructor(questions: Question[]) {
+  constructor(questions: Question[]) { // Se pasa el arreglo de preguntas
     this.questions = questions;
   }
   // Método que da preguntas al azar

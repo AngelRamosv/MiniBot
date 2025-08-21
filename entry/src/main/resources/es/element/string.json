@@ -1,64 +1,52 @@
 {
   "string": [
     {
-      "name": "module_desc",
-      "value": "module description"
-    },
-    {
-      "name": "EntryAbility_desc",
-      "value": "description"
-    },
-    {
-      "name": "EntryAbility_label",
-      "value": "label"
-    },
-    {
       "name": "Language",
-      "value": "Language"
+      "value": "Selecciona\nidioma"
     },
     {
       "name": "Spanish",
-      "value": "Spanish"
+      "value": "Español"
     },
     {
       "name": "English",
-      "value": "English"
+      "value": "Inglés"
     },
     {
       "name": "Go",
-      "value": "Go"
+      "value": "Ir"
     },
     {
       "name": "Welcome",
-      "value": "Welcome to\nMiniBot"
+      "value": "Bienvenido a\nMiniBot"
     },
     {
       "name": "Ok",
-      "value": "Ok"
+      "value": "Bien"
     },
     {
       "name": "Levelp",
-      "value": "Level"
+      "value": "Nivel"
     },
     {
       "name": "Basicp",
-      "value": "Basic"
+      "value": "Básico"
     },
     {
       "name": "Intermediatep",
-      "value": "Intermediate"
+      "value": "Intermedio"
     },
     {
       "name": "Advancedp",
-      "value": "Advanced"
+      "value": "Avanzado"
     },
     {
       "name": "Basicb",
-      "value": "Basic"
+      "value": "Básico"
     },
     {
       "name": "Introductionb",
-      "value": "Introduction"
+      "value": "Introducción"
     },
     {
       "name": "Variablesb",
@@ -66,43 +54,43 @@
     },
     {
       "name": "Operatorsb",
-      "value": "Operators"
+      "value": "Operadores"
     },
     {
       "name": "Conditionalsb",
-      "value": "Conditionals"
+      "value": "Condicionales"
     },
     {
       "name": "Cyclesb",
-      "value": "Cycles"
+      "value": "Ciclos"
     },
     {
       "name": "Intermediatei",
-      "value": "Intermediate"
+      "value": "Intermedio"
     },
     {
       "name": "Functionsi",
-      "value": "Functions"
+      "value": "Funciones"
     },
     {
       "name": "Listsandtuplesi",
-      "value": "Lists and tuples"
+      "value": "Listas y tuplas"
     },
     {
       "name": "Dictionariesi",
-      "value": "Dictionaries"
+      "value": "Diccionarios"
     },
     {
       "name": "Errorhandlingi",
-      "value": "Error handling"
+      "value": "Manejo de errores"
     },
     {
       "name": "Filesi",
-      "value": "Files"
+      "value": "Archivos"
     },
     {
       "name": "Advanceda",
-      "value": "Advanced"
+      "value": "Avanzado"
     },
     {
       "name": "POOa",
@@ -110,19 +98,19 @@
     },
     {
       "name": "Functionslambda",
-      "value": "Functions Lambda"
+      "value": "Funciones Lambda"
     },
     {
       "name": "Filemanagementa",
-      "value": "File management"
+      "value": "Manejo de archivos"
     },
     {
       "name": "Useoflibrariesa",
-      "value": "Use of libraries"
+      "value": "Uso de librerías"
     },
     {
       "name": "APIa",
-      "value": "API"
+      "value": "API de python"
     }
   ]
 }

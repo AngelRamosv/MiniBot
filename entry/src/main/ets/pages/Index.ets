@@ -1,89 +1,124 @@
+// Versión Multilenguage
 // Importaciones
 import router from '@ohos.router';
 import { BusinessError } from '@ohos.base';
 
-// Estructura del componente principal
-@Entry // Componente como punto de entrada
-@Component // Declara que esto es un componente visual
-struct Index {
-  // Valores reactivos
-  @State opacityValue: number = 0; // Opacidad
-  @State scaleValue: number = 0.5; // Tamaño
-  // Método
-  onPageShow() {
-    this.opacityValue = 1;
-    this.scaleValue = 1;
+// Componente principal
+@Entry
+@Component
+struct LanguageSelector {
+  @State selectedLanguage: string = 'es';
+
+  // Evento para idioma
+  aboutToAppear() {
+    // Cargar idioma si ya se guardó antes
+    this.selectedLanguage = AppStorage.get('appLanguage') as string || 'es';
   }
-  // Función de navegación
-  private navigateToLanguageSelector(): void {
+
+  private navigateToMain() {
+    // Guardar el idioma seleccionado
+    AppStorage.setOrCreate('appLanguage', this.selectedLanguage);
+
+    // Navegar a la página principal
     router.pushUrl({
-      url: 'pages/LanguageSelector'
+      url: 'pages/Main',
+      params: { language: this.selectedLanguage }
     }).catch((err: BusinessError) => {
-      console.error(`Navigation failed. Code: ${err.code}, Message: ${err.message}`);
+      console.error('Navigation failed:', err);
     });
   }
-  // Método build (Diseño de la pantalla)
+
   build() {
-    Stack({ alignContent: Alignment.Center }) { // Contenedor que superpone elementos
-      // Imagen de fondo
-      Image($r('app.media.fondo'))
+    Stack({ alignContent: Alignment.Center }) {
+      Image($r('app.media.vale'))
         .width('100%')
         .height('100%')
         .objectFit(ImageFit.Cover)
         .opacity(1)
 
-      // Contenido principal
-      Column() {
-        Text('Bienvenido a \nMiniBot')
-          .fontSize(20)
-          .fontColor(Color.White)
-          .fontWeight(FontWeight.Bold)
-          .margin({ top: 25, bottom: 5 })
-          .opacity(this.opacityValue)
-          .scale({ x: this.scaleValue, y: this.scaleValue })
-          .animation({
-            duration: 1000,
-            curve: Curve.EaseOut
-          })
-        // Imagen principal de MiniBot
-        Image($r('app.media.roboco'))
-          .width(100)
-          .height(100)
-          .margin({ top: 0, bottom: 5 })
-          .opacity(this.opacityValue)
-          .scale({ x: this.scaleValue, y: this.scaleValue })
-          .animation({
-            duration: 1000,
-            curve: Curve.EaseOut,
-            delay: 200
-          })
-        // Botón principal
-        Button('Ok', { type: ButtonType.Capsule })
-          .width(110)
-          .height(30)
-          .backgroundColor('#77DD77')
-          .fontColor(Color.Black)
-          .margin({ top: 0, bottom: 30 })
-          .opacity(this.opacityValue)
-          .animation({
-            duration: 3000,
-            curve: Curve.EaseOut,
-            delay: 400
-          })
-          // Evento Método del componente button
-          .onClick(() => {
-            this.navigateToLanguageSelector();
-          })
+      Scroll() {
+        Column() {
+          Text($r('app.string.Language'))
+            .fontSize(22)
+            .fontColor(Color.White)
+            .fontWeight(FontWeight.Bold)
+            .margin({ top: 30, bottom: 30 })
+            .width('100%')
+            .textAlign(TextAlign.Center)
+
+          Column() {
+            // Opción Español
+            Row() {
+              Text($r('app.string.Spanish'))
+                .fontSize(18)
+                .fontColor(Color.White)
+                .margin({ right: 15 })
+
+              Image($r('app.media.spanish'))
+                .width(30)
+                .height(30)
+            }
+            .width('80%')
+            .height(60)
+            .backgroundColor(this.selectedLanguage === 'es' ? '#00000033' : '#00000000')
+            .border({
+              width: this.selectedLanguage === 'es' ? 2 : 1,
+              color: this.selectedLanguage === 'es' ? Color.White : Color.Gray
+            })
+            .borderRadius(12)
+            .justifyContent(FlexAlign.SpaceBetween)
+            .padding({ left: 20, right: 20 })
+            .margin({ bottom: 15 })
+            .onClick(() => {
+              this.selectedLanguage = 'es';
+            })
+
+            // Opción English
+            Row() {
+              Text($r('app.string.English'))
+                .fontSize(18)
+                .fontColor(Color.White)
+                .margin({ right: 15 })
+
+              Image($r('app.media.english'))
+                .width(30)
+                .height(30)
+            }
+            .width('80%')
+            .height(60)
+            .backgroundColor(this.selectedLanguage === 'en' ? '#00000033' : '#00000000')
+            .border({
+              width: this.selectedLanguage === 'en' ? 2 : 1,
+              color: this.selectedLanguage === 'en' ? Color.White : Color.Gray
+            })
+            .borderRadius(12)
+            .justifyContent(FlexAlign.SpaceBetween)
+            .padding({ left: 20, right: 20 })
+            .margin({ bottom: 30 })
+            .onClick(() => {
+              this.selectedLanguage = 'en';
+            })
+
+            Button($r('app.string.Go'), { type: ButtonType.Capsule })
+              .width('70%')
+              .height(45)
+              .backgroundColor('#00000000')
+              .border({ width: 2, color: Color.White })
+              .fontColor(Color.White)
+              .margin({ bottom: 45 })
+              .onClick(() => this.navigateToMain())
+          }
+          .width('100%')
+          .borderRadius({ topLeft: 30, topRight: 30 })
+          .clip(true)
+          .backgroundColor('#00000055')
+        }
+        .width('100%')
+        .alignItems(HorizontalAlign.Center)
       }
-      // Propiedades aplicadas a column (texto, imagen, boton)
       .width('100%')
       .height('100%')
-      .justifyContent(FlexAlign.Center) // Centra verticalemnte
-      .alignItems(HorizontalAlign.Center) // Centra horizontalmente
+      .scrollBar(BarState.Off)
     }
-    // Evento del sistema cuando la pantalla aparece
-    .onAppear(() => {
-      this.onPageShow(); // Método
-    })
   }
 }

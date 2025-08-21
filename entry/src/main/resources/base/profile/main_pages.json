@@ -1,7 +1,7 @@
 {
   "src": [
     "pages/Index",
-    "pages/LanguageSelector",
+    "pages/Main",
     "pages/LevelPage",
     "pages/LevelBasic",
     "pages/LevelIntermediate",

@@ -1,7 +1,8 @@
+// Importaciones
 import router from '@ohos.router';
 import { BusinessError } from '@ohos.base';
 
-// Versión corregida sin 'as const' y con tipado explícito
+// Interfaz para los temas
 interface Topic {
   INTRO: string;
   VARIABLES: string;
@@ -9,7 +10,7 @@ interface Topic {
   CONDITIONALS: string;
   LOOPS: string;
 }
-
+// Objeto de la interfaz Topic
 const TOPICS: Topic = {
   INTRO: 'introduccion',
   VARIABLES: 'variables',
@@ -17,11 +18,12 @@ const TOPICS: Topic = {
   CONDITIONALS: 'condicionales',
   LOOPS: 'ciclos'
 };
-
+// Componente principal
 @Entry
 @Component
+  // Estructura de la página
 struct LevelBasic {
-  // Método original sin cambios
+  // Método de navegación a QuizPage
   private navigateToQuiz(topic: string, title: string): void {
     router.pushUrl({
       url: 'pages/QuizPage',
@@ -34,10 +36,10 @@ struct LevelBasic {
       console.error(`Navigation failed: ${err.message}`);
     });
   }
-
+  // Diseño de pantalla
   build() {
     Stack({ alignContent: Alignment.Center }) {
-      // Imagen de fondo (original)
+      // Imagen de fondo
       Image($r('app.media.vale'))
         .width('100%')
         .height('100%')
@@ -45,9 +47,10 @@ struct LevelBasic {
         .opacity(1)
 
       Scroll() {
+        // Contenido principal
         Column() {
-          // Título (original)
-          Text('Básico')
+          // Título
+          Text($r('app.string.Basicb'))
             .fontSize(22)
             .fontColor(Color.White)
             .fontWeight(FontWeight.Bold)
@@ -56,8 +59,8 @@ struct LevelBasic {
             .textAlign(TextAlign.Center)
 
           Column() {
-            // Botones con constantes corregidas
-            Button('Introducción', { type: ButtonType.Capsule })
+            // Botón Introducción
+            Button($r('app.string.Introductionb'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
@@ -66,7 +69,8 @@ struct LevelBasic {
               .margin({ bottom: 12 })
               .onClick(() => this.navigateToQuiz(TOPICS.INTRO, 'Introducción'))
 
-            Button('Variables', { type: ButtonType.Capsule })
+            // Botón Variables
+            Button($r('app.string.Variablesb'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
@@ -75,7 +79,8 @@ struct LevelBasic {
               .margin({ bottom: 12 })
               .onClick(() => this.navigateToQuiz(TOPICS.VARIABLES, 'Variables'))
 
-            Button('Operadores', { type: ButtonType.Capsule })
+            // Botón Operadores
+            Button($r('app.string.Operatorsb'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
@@ -84,7 +89,8 @@ struct LevelBasic {
               .margin({ bottom: 12 })
               .onClick(() => this.navigateToQuiz(TOPICS.OPERATORS, 'Operadores'))
 
-            Button('Condicionales', { type: ButtonType.Capsule })
+            // Botón Condicionales
+            Button($r('app.string.Conditionalsb'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
@@ -93,7 +99,8 @@ struct LevelBasic {
               .margin({ bottom: 12 })
               .onClick(() => this.navigateToQuiz(TOPICS.CONDITIONALS, 'Condicionales'))
 
-            Button('Ciclos', { type: ButtonType.Capsule })
+            // Botón Ciclos
+            Button($r('app.string.Cyclesb'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
@@ -102,14 +109,17 @@ struct LevelBasic {
               .margin({ bottom: 45 })
               .onClick(() => this.navigateToQuiz(TOPICS.LOOPS, 'Ciclos'))
           }
+          // Contenedor de botones
           .width('100%')
           .borderRadius({ topLeft: 30, topRight: 30 })
           .clip(true)
           .backgroundColor('#00000055')
         }
+        // Column()
         .width('100%')
         .alignItems(HorizontalAlign.Center)
       }
+      // Scroll
       .width('100%')
       .height('100%')
       .scrollBar(BarState.Off)

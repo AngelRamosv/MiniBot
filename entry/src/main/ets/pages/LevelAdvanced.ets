@@ -1,9 +1,9 @@
-//Hola Ramab
+// Importaciones
 import router from '@ohos.router';
 import { BusinessError } from '@ohos.base';
 
-// Definimos el tipo Topic para los temas avanzados
-interface AdvancedTopic {
+// Interfaz para los temas
+interface Topic {
   OOP: string;
   LAMBDA: string;
   MANAGEMENT: string;
@@ -11,8 +11,8 @@ interface AdvancedTopic {
   API: string;
 }
 
-// Constantes para los temas avanzados
-const ADVANCED_TOPICS: AdvancedTopic = {
+// Objeto de la interfaz Topic
+const TOPICS: Topic = {
   OOP: 'poo',
   LAMBDA: 'lambda',
   MANAGEMENT: 'manejo_archivos',
@@ -20,10 +20,12 @@ const ADVANCED_TOPICS: AdvancedTopic = {
   API: 'api'
 };
 
+// Componente principal
 @Entry
 @Component
+  // Estructura de la página
 struct LevelAdvanced {
-  // Método de navegación (igual que en LevelBasic)
+  // Método de navegación a QuizPage
   private navigateToQuiz(topic: string, title: string): void {
     router.pushUrl({
       url: 'pages/QuizPage',
@@ -36,10 +38,10 @@ struct LevelAdvanced {
       console.error(`Navigation failed: ${err.message}`);
     });
   }
-
+  // Diseño de pantalla
   build() {
     Stack({ alignContent: Alignment.Center }) {
-      // Imagen de fondo (igual que en LevelBasic)
+      // Imagen
       Image($r('app.media.vale'))
         .width('100%')
         .height('100%')
@@ -47,9 +49,10 @@ struct LevelAdvanced {
         .opacity(1)
 
       Scroll() {
+        // Contenido principal
         Column() {
-          // Título (igual que en LevelBasic)
-          Text('Avanzado')
+          // Título
+          Text($r('app.string.Advanceda'))
             .fontSize(22)
             .fontColor(Color.White)
             .fontWeight(FontWeight.Bold)
@@ -58,60 +61,67 @@ struct LevelAdvanced {
             .textAlign(TextAlign.Center)
 
           Column() {
-            // Botones con la misma estructura que LevelBasic
-            Button('POO', { type: ButtonType.Capsule })
+            // Botón POO
+            Button($r('app.string.POOa'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
               .border({ width: 2, color: Color.White })
               .fontColor(Color.White)
               .margin({ bottom: 12 })
-              .onClick(() => this.navigateToQuiz(ADVANCED_TOPICS.OOP, 'Programación Orientada a\nObjetos'))
+              .onClick(() => this.navigateToQuiz(TOPICS.OOP, 'Programación Orientada a\nObjetos'))
 
-            Button('Funciones Lambda', { type: ButtonType.Capsule })
+            // Botón Funciones Lambda
+            Button($r('app.string.Functionslambda'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
               .border({ width: 2, color: Color.White })
               .fontColor(Color.White)
               .margin({ bottom: 12 })
-              .onClick(() => this.navigateToQuiz(ADVANCED_TOPICS.LAMBDA, 'Funciones\nLambda'))
+              .onClick(() => this.navigateToQuiz(TOPICS.LAMBDA, 'Funciones\nLambda'))
 
-            Button('Manejo de archivos', { type: ButtonType.Capsule })
+            // Botón Manejo de archivos
+            Button($r('app.string.Filemanagementa'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
               .border({ width: 2, color: Color.White })
               .fontColor(Color.White)
               .margin({ bottom: 12 })
-              .onClick(() => this.navigateToQuiz(ADVANCED_TOPICS.MANAGEMENT, 'Manejo de\nArchivos'))
+              .onClick(() => this.navigateToQuiz(TOPICS.MANAGEMENT, 'Manejo de\nArchivos'))
 
-            Button('Uso de librerías', { type: ButtonType.Capsule })
+            // Botón Uso de Librerías
+            Button($r('app.string.Useoflibrariesa'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
               .border({ width: 2, color: Color.White })
               .fontColor(Color.White)
               .margin({ bottom: 12 })
-              .onClick(() => this.navigateToQuiz(ADVANCED_TOPICS.LIBRARIES, 'Uso de\nLibrerías'))
+              .onClick(() => this.navigateToQuiz(TOPICS.LIBRARIES, 'Uso de\nLibrerías'))
 
-            Button('API Python', { type: ButtonType.Capsule })
+            // Botón API
+            Button($r('app.string.APIa'), { type: ButtonType.Capsule })
               .width('80%')
               .height(45)
               .backgroundColor('#00000000')
               .border({ width: 2, color: Color.White })
               .fontColor(Color.White)
               .margin({ bottom: 45 })
-              .onClick(() => this.navigateToQuiz(ADVANCED_TOPICS.API, 'API Python'))
+              .onClick(() => this.navigateToQuiz(TOPICS.API, 'API Python'))
           }
+          // Contenedor de botones
           .width('100%')
           .borderRadius({ topLeft: 30, topRight: 30 })
           .clip(true)
           .backgroundColor('#00000055')
         }
+        // Column()
         .width('100%')
         .alignItems(HorizontalAlign.Center)
       }
+      // Scroll
       .width('100%')
       .height('100%')
       .scrollBar(BarState.Off)
