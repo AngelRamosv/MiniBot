@@ -1,28 +1,50 @@
 // Importaciones
 import { QuizController } from '../controller/QuizController';
 import router from '@ohos.router';
-import { Question, DifficultyLevel } from '../model/TopicsData';
+import { DifficultyLevel } from '../model/TopicsData';
 
 // Interfaz con parámetros
 interface QuizParams {
   topic: string;
   title: string;
-  difficulty: DifficultyLevel;
+  difficulty: string;
+  language: string;
 }
+
+// Interfaz para preguntas
+interface QuizQuestion {
+  id: string;
+  questionText: string;
+  options: string[];
+  correctAnswer: number;
+  topic: string;
+  difficulty: string;
+}
+
+// Función para convertir string a DifficultyLevel
+function toDifficultyLevel(difficulty: string): DifficultyLevel {
+  switch (difficulty) {
+    case 'basic': return 'basic';
+    case 'intermediate': return 'intermediate';
+    case 'advanced': return 'advanced';
+    default: return 'basic';
+  }
+}
+
 // Componente principal
 @Entry
 @Component
-  // Estructura Principal
 struct QuizPage {
   // Estados y Variables
-  private quizController: QuizController = new QuizController('introduccion', 'basic');
-  @State currentQuestions: Question[] = [];
+  private quizController: QuizController = new QuizController('introduccion', 'basic', 'es');
+  @State currentQuestions: QuizQuestion[] = [];
   @State currentQuestionIndex: number = 0;
   @State selectedAnswer: number | null = null;
   @State showResult: boolean = false;
   @State score: number = 0;
   @State quizTitle: string = 'Quiz Python';
   @State isAnswerCorrect: boolean = false;
+  @State currentLanguage: string = 'es';
   private scroller: Scroller = new Scroller();
 
   // Método que obtiene los parámetros
@@ -32,17 +54,21 @@ struct QuizPage {
       this.initializeQuiz(params);
     }
   }
+
   // Inicialización y lógica del Quiz
-  // Cambia título y controlador según el tema y dificultad
-  // Obtiene un set aleatorio de 5 preguntas
-  // Resetea el estado del quiz.
   private initializeQuiz(params: QuizParams): void {
     this.quizTitle = params.title;
-    this.quizController = new QuizController(params.topic, params.difficulty);
-    this.currentQuestions = this.quizController.getRandomQuestionSet(5);
+    this.currentLanguage = params.language || 'es';
+
+    // Convertir el string a DifficultyLevel
+    const difficultyLevel: DifficultyLevel = toDifficultyLevel(params.difficulty);
+
+    this.quizController = new QuizController(params.topic, difficultyLevel, this.currentLanguage);
+    this.currentQuestions = this.quizController.getRandomQuestionSet(5) as QuizQuestion[];
     this.resetQuizState();
   }
-  // Método para reiniciar el Quiz
+
+  // Reseteo
   private resetQuizState(): void {
     this.currentQuestionIndex = 0;
     this.selectedAnswer = null;
@@ -51,10 +77,7 @@ struct QuizPage {
     this.isAnswerCorrect = false;
     this.scrollToTop();
   }
-  // Método para la selección de respuesta
-  // Guarda la opción seleccionada
-  // Comprueba si es correcta usando quizController
-  // Si es correcta guarda el score.
+
   private handleAnswerSelection(optionIndex: number): void {
     if (this.showResult) return;
 
@@ -68,7 +91,7 @@ struct QuizPage {
       this.score += 1;
     }
   }
-  // Método para dirigir a las otras preguntas
+
   private goToNextQuestion(): void {
     if (this.currentQuestionIndex < this.currentQuestions.length - 1) {
       this.currentQuestionIndex += 1;
@@ -78,7 +101,7 @@ struct QuizPage {
       this.scrollToTop();
     }
   }
-  // Método para controlar el scroll
+
   private scrollToTop(): void {
     this.scroller.scrollTo({
       xOffset: 0,
@@ -86,10 +109,10 @@ struct QuizPage {
       animation: { duration: 300, curve: Curve.EaseOut }
     });
   }
+
   // Diseño de pantalla
   build() {
     Stack({ alignContent: Alignment.Center }) {
-      // Imagen
       Image($r('app.media.ok'))
         .width('100%')
         .height('100%')
@@ -98,7 +121,6 @@ struct QuizPage {
 
       Scroll(this.scroller) {
         Column() {
-          // Titulo
           Text(this.quizTitle)
             .fontSize(22)
             .fontColor(Color.White)
@@ -106,7 +128,7 @@ struct QuizPage {
             .margin({ top: 30, bottom: 15 })
             .width('100%')
             .textAlign(TextAlign.Center)
-          // Contenido principal
+
           Column() {
             Text(this.currentQuestions[this.currentQuestionIndex]?.questionText ?? '')
               .fontSize(18)
@@ -114,7 +136,7 @@ struct QuizPage {
               .margin({ bottom: 20 })
               .maxLines(15)
               .textOverflow({ overflow: TextOverflow.Ellipsis })
-            // Opciones de respuesta
+
             ForEach(this.currentQuestions[this.currentQuestionIndex]?.options ?? [], (option: string, index: number) => {
               Button(option, { type: ButtonType.Capsule })
                 .width('80%')
@@ -136,7 +158,7 @@ struct QuizPage {
                   }
                 })
             })
-            // Condicional para el manejo de respuestas
+
             if (this.showResult) {
               Column() {
                 Row() {
@@ -144,7 +166,9 @@ struct QuizPage {
                     .width(24)
                     .height(24)
                     .margin({ right: 8 })
-                  Text(this.isAnswerCorrect ? '¡Correcto!' : '¡Incorrecto!')
+                  Text(this.isAnswerCorrect ?
+                    (this.currentLanguage === 'es' ? '¡Correcto!' : 'Correct!') :
+                    (this.currentLanguage === 'es' ? '¡Incorrecto!' : 'Incorrect!'))
                     .fontSize(18)
                     .fontColor(this.isAnswerCorrect ? '#4CAF50' : '#F44336')
                     .fontWeight(FontWeight.Bold)
@@ -153,7 +177,7 @@ struct QuizPage {
                 .margin({ bottom: 20 })
 
                 if (this.currentQuestionIndex < this.currentQuestions.length - 1) {
-                  Button('Siguiente', { type: ButtonType.Capsule })
+                  Button(this.currentLanguage === 'es' ? 'Siguiente' : 'Next', { type: ButtonType.Capsule })
                     .width('50%')
                     .height(45)
                     .backgroundColor(this.isAnswerCorrect ? '#4CAF50' : '#F44336')
@@ -170,7 +194,9 @@ struct QuizPage {
                         .width(60)
                         .height(60)
                         .margin({ bottom: 10 })
-                      Text('¡Felicidades, eres muy bueno!')
+                      Text(this.currentLanguage === 'es' ?
+                        '¡Felicidades, eres muy bueno!' :
+                        'Congratulations, you are very good!')
                         .fontSize(18)
                         .fontColor('#4CAF50')
                         .fontWeight(FontWeight.Bold)
@@ -180,19 +206,21 @@ struct QuizPage {
                         .width(60)
                         .height(60)
                         .margin({ bottom: 10 })
-                      Text('¡Buen intento, sigue practicando!')
+                      Text(this.currentLanguage === 'es' ?
+                        '¡Buen intento, sigue practicando!' :
+                        'Good try, keep practicing!')
                         .fontSize(18)
                         .fontColor('#FFC107')
                         .fontWeight(FontWeight.Bold)
                         .margin({ bottom: 10 })
                     }
 
-                    Text(`Puntuación final: ${this.score}/${this.currentQuestions.length}`)
+                    Text(`${this.currentLanguage === 'es' ? 'Puntuación final' : 'Final score'}: ${this.score}/${this.currentQuestions.length}`)
                       .fontSize(20)
                       .fontColor(Color.White)
                       .margin({ top: 10, bottom: 20 })
 
-                    Button('Finalizar', { type: ButtonType.Capsule })
+                    Button(this.currentLanguage === 'es' ? 'Finalizar' : 'Finish', { type: ButtonType.Capsule })
                       .width('50%')
                       .height(45)
                       .backgroundColor('#2196F3')
@@ -203,36 +231,29 @@ struct QuizPage {
                         router.back();
                       })
                   }
-                  // Column() que contiene el resultado final del quiz
                   .width('100%')
                   .alignItems(HorizontalAlign.Center)
                 }
               }
-              // Column() que contiene el bloque condicional
               .width('100%')
               .alignItems(HorizontalAlign.Center)
             }
           }
-          // Column() Contenido principal de preguntas y opciones de feedback
           .width('100%')
           .borderRadius(20)
           .backgroundColor('#00000055')
           .padding(20)
           .margin({ bottom: 30 })
         }
-        // Column() principal dentro del scroll
         .width('100%')
         .alignItems(HorizontalAlign.Center)
       }
-      // Scroll
       .width('100%')
       .height('100%')
       .scrollBar(BarState.Off)
     }
-    // Contenedor raíz del build()
     .width('100%')
     .height('100%')
-    // Gesto para deslizar
     .gesture(
       GestureGroup(GestureMode.Sequence,
         PanGesture({ direction: PanDirection.Right })

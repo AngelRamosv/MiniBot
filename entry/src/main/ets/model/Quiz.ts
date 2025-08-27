@@ -5,7 +5,7 @@ export class Quiz {
   private questions: Question[]; // Arreglo de preguntas
 
   // Costructor
-  constructor(questions: Question[]) { // Se pasa el arreglo de preguntas
+  constructor(questions: Question[]) {
     this.questions = questions;
   }
   // Método que da preguntas al azar

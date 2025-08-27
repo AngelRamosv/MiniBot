@@ -1,25 +1,97 @@
-// Versión Multilenguage en ramad
-// Importaciones
+// Versión completa
 import router from '@ohos.router';
 import { BusinessError } from '@ohos.base';
 
-// Componente principal
+//Componente principal
 @Entry
 @Component
 struct LanguageSelector {
   @State selectedLanguage: string = 'es';
 
-  // Evento para idioma
   aboutToAppear() {
-    // Cargar idioma si ya se guardó antes
-    this.selectedLanguage = AppStorage.get('appLanguage') as string || 'es';
+    // Cargar idioma
+    const savedLanguage = AppStorage.get('appLanguage') as string;
+    if (savedLanguage) {
+      this.selectedLanguage = savedLanguage;
+    }
+  }
+  // Función simple para obtener strings
+  getString(key: string): string {
+    // Strings en español
+    if (this.selectedLanguage === 'es') {
+      switch (key) {
+        case 'Language': return 'Idioma';
+        case 'Spanish': return 'Español';
+        case 'English': return 'Inglés';
+        case 'Go': return 'Ir';
+        case 'Welcome': return 'Bienvenido a\nMiniBot';
+        case 'Ok': return 'Bien';
+        case 'Levelp': return 'Nivel';
+        case 'Basicp': return 'Básico';
+        case 'Intermediatep': return 'Intermedio';
+        case 'Advancedp': return 'Avanzado';
+        case 'Basicb': return 'Básico';
+        case 'Introductionb': return 'Introducción';
+        case 'Variablesb': return 'Variables';
+        case 'Operatorsb': return 'Operadores';
+        case 'Conditionalsb': return 'Condicionales';
+        case 'Cyclesb': return 'Ciclos';
+        case 'Intermediatei': return 'Intermedio';
+        case 'Functionsi': return 'Funciones';
+        case 'Listsandtuplesi': return 'Listas y tuplas';
+        case 'Dictionariesi': return 'Diccionarios';
+        case 'Errorhandlingi': return 'Manejo de errores';
+        case 'Filesi': return 'Archivos';
+        case 'Advanceda': return 'Avanzado';
+        case 'POOa': return 'POO';
+        case 'Functionslambda': return 'Funciones Lambda';
+        case 'Filemanagementa': return 'Manejo de archivos';
+        case 'Useoflibrariesa': return 'Uso de librerías';
+        case 'APIa': return 'API de python';
+        default: return key;
+      }
+    }
+    // Strings en inglés (base)
+    else {
+      switch (key) {
+        case 'Language': return 'Language';
+        case 'Spanish': return 'Spanish';
+        case 'English': return 'English';
+        case 'Go': return 'Go';
+        case 'Welcome': return 'Welcome to\nMiniBot';
+        case 'Ok': return 'Ok';
+        case 'Levelp': return 'Level';
+        case 'Basicp': return 'Basic';
+        case 'Intermediatep': return 'Intermediate';
+        case 'Advancedp': return 'Advanced';
+        case 'Basicb': return 'Basic';
+        case 'Introductionb': return 'Introduction';
+        case 'Variablesb': return 'Variables';
+        case 'Operatorsb': return 'Operators';
+        case 'Conditionalsb': return 'Conditionals';
+        case 'Cyclesb': return 'Cycles';
+        case 'Intermediatei': return 'Intermediate';
+        case 'Functionsi': return 'Functions';
+        case 'Listsandtuplesi': return 'Lists and tuples';
+        case 'Dictionariesi': return 'Dictionaries';
+        case 'Errorhandlingi': return 'Error handling';
+        case 'Filesi': return 'Files';
+        case 'Advanceda': return 'Advanced';
+        case 'POOa': return 'POO';
+        case 'Functionslambda': return 'Functions Lambda';
+        case 'Filemanagementa': return 'File management';
+        case 'Useoflibrariesa': return 'Use of libraries';
+        case 'APIa': return 'API';
+        default: return key;
+      }
+    }
   }
 
   private navigateToMain() {
     // Guardar el idioma seleccionado
     AppStorage.setOrCreate('appLanguage', this.selectedLanguage);
 
-    // Navegar a la página principal
+    // Navega a la página principal
     router.pushUrl({
       url: 'pages/Main',
       params: { language: this.selectedLanguage }
@@ -38,7 +110,7 @@ struct LanguageSelector {
 
       Scroll() {
         Column() {
-          Text($r('app.string.Language'))
+          Text(this.getString('Language'))
             .fontSize(22)
             .fontColor(Color.White)
             .fontWeight(FontWeight.Bold)
@@ -49,7 +121,7 @@ struct LanguageSelector {
           Column() {
             // Opción Español
             Row() {
-              Text($r('app.string.Spanish'))
+              Text(this.getString('Spanish'))
                 .fontSize(18)
                 .fontColor(Color.White)
                 .margin({ right: 15 })
@@ -73,9 +145,9 @@ struct LanguageSelector {
               this.selectedLanguage = 'es';
             })
 
-            // Opción English
+            // Opción Inglés
             Row() {
-              Text($r('app.string.English'))
+              Text(this.getString('English'))
                 .fontSize(18)
                 .fontColor(Color.White)
                 .margin({ right: 15 })
@@ -99,7 +171,7 @@ struct LanguageSelector {
               this.selectedLanguage = 'en';
             })
 
-            Button($r('app.string.Go'), { type: ButtonType.Capsule })
+            Button(this.getString('Go'), { type: ButtonType.Capsule })
               .width('70%')
               .height(45)
               .backgroundColor('#00000000')

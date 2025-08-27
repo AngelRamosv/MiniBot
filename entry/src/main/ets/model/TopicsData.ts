@@ -1,7 +1,7 @@
-// Definimos un tipo personalizado
+// Tipo personalizado
 export type DifficultyLevel = 'basic' | 'intermediate' | 'advanced';
 
-// Definimos una constante TOPICS para los temas
+// TOPICS para los temas
 export const TOPICS = { // Objeto
   INTRO: 'introduccion',
   VARIABLES: 'variables',
@@ -32,13 +32,13 @@ export interface Question {
 
 // Arreglo de preguntas organizado por temas
 export const allQuestions: Question[] = [
-// Tema Introducción
+  // Tema Introducción
   {
     id: 'intro_1',
     questionText: `¿Python es un lenguaje?`,
     options: ['Interpretado', 'Compilado', 'De bajo nivel', 'Dinámico'],
     correctAnswer: 0,
-    topic: TOPICS.INTRO, // Evita errores de ortografía, actualiza el valor en todas partes
+    topic: TOPICS.INTRO,
     difficulty: 'basic'
   },
   {
@@ -504,4 +504,5 @@ export const allQuestions: Question[] = [
     topic: TOPICS.API,
     difficulty: 'advanced'
   }
+
 ];

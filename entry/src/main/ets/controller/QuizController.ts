@@ -1,43 +1,60 @@
 // Importaciones
-import { Question, DifficultyLevel, allQuestions } from '../model/TopicsData'; // Importación añadida
+import { Question, DifficultyLevel, allQuestions } from '../model/TopicsData';
+import { allQuestionsEN } from '../model/TopicsDataEn';
 import { Quiz } from '../model/Quiz';
 
-// Definimos la clase
+// Clase principal
 export class QuizController {
   // Propiedades privadas
-  private quiz: Quiz; // Quiz
-  private topic: string; // Tema
-  private difficulty: DifficultyLevel; // Dificultad
+  private quiz: Quiz;
+  private topic: string;
+  private difficulty: DifficultyLevel;
+  private language: string;
 
   // Constructor
-  constructor(topic: string, difficulty: DifficultyLevel = 'basic') {
+  constructor(topic: string, difficulty: DifficultyLevel = 'basic', language: string = 'es') {
     this.topic = topic;
     this.difficulty = difficulty;
+    this.language = language;
     const questions = this.getQuestionsByTopicAndDifficulty();
     this.quiz = new Quiz(questions);
   }
 
   // Método para filtrar preguntas por tema y dificultad
-  private getQuestionsByTopicAndDifficulty(): Question[] {
-    return allQuestions.filter(q =>
-    q.topic === this.topic &&
-      q.difficulty === this.difficulty
-    );
+  private getQuestionsByTopicAndDifficulty(): any[] {
+    // Selecciona el conjunto de preguntas según el idioma
+    const questionSet = this.language === 'es' ? allQuestions : allQuestionsEN;
+
+    // Filtrar manualmente para evitar problemas de tipos
+    const filteredQuestions: any[] = [];
+
+    for (const question of questionSet) {
+      if (question.topic === this.topic && question.difficulty === this.difficulty) {
+        filteredQuestions.push({
+          id: question.id,
+          questionText: question.questionText,
+          options: question.options,
+          correctAnswer: question.correctAnswer,
+          topic: question.topic,
+          difficulty: question.difficulty
+        });
+      }
+    }
+
+    return filteredQuestions;
   }
 
   /**
    * Conjunto aleatorio de preguntas
    * @param count Número de preguntas a obtener
    */
-  getRandomQuestionSet(count: number): Question[] {
+  getRandomQuestionSet(count: number): any[] {
     const availableQuestions = this.getQuestionsByTopicAndDifficulty();
 
-    // Si hay menos preguntas que las solicitadas, devuelve todas disponibles
     if (availableQuestions.length <= count) {
       return [...availableQuestions].sort(() => Math.random() - 0.5);
     }
 
-    // Algoritmo Fisher-Yates para mostrar las preguntas aleatorias
     const shuffled = [...availableQuestions];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
